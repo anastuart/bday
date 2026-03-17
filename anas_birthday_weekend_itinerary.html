@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #fce8ee;
+    font-family: 'DM Sans', sans-serif;
+    color: #2a1a1f;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .sparkle {
+    position: absolute;
+    pointer-events: none;
+    font-size: 18px;
+    opacity: 0.5;
+    animation: twinkle 2.5s ease-in-out infinite;
+    color: #d4537e;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+    50% { opacity: 0.8; transform: scale(1.3) rotate(15deg); }
+  }
+
+  .page {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 0 0 60px;
+    position: relative;
+  }
+
+  /* Header */
+  .header {
+    background: #fce8ee;
+    text-align: center;
+    padding: 48px 24px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px; right: -40px;
+    height: 120px;
+    background: #f4b8cb;
+    border-radius: 0 0 60% 60%;
+    opacity: 0.4;
+  }
+
+  .its-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #d4537e;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 4px;
+  }
+  .name-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 62px;
+    font-weight: 900;
+    font-style: italic;
+    color: #2a1a1f;
+    line-height: 0.9;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+  .weekend-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #d4537e;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 4px;
+  }
+  .location-tag {
+    display: inline-block;
+    background: #d4537e;
+    color: #fce8ee;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+  }
+  .location-tag a {
+    color: #fce8ee;
+    text-decoration: none;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 24px;
+    margin: 4px 0;
+  }
+  .divider-line { flex: 1; height: 1px; background: #f4b8cb; }
+  .divider-star { color: #d4537e; font-size: 12px; }
+
+  /* Day header */
+  .day-header {
+    padding: 24px 24px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .day-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: #d4537e;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .day-date {
+    font-size: 12px;
+    font-weight: 500;
+    color: #c47a8a;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Event blocks */
+  .events {
+    padding: 12px 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .event {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    animation: fadeUp 0.5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .event-time {
+    min-width: 56px;
+    text-align: right;
+    padding-top: 14px;
+    flex-shrink: 0;
+  }
+  .event-time span {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #c47a8a;
+    text-transform: uppercase;
+    line-height: 1.3;
+    display: block;
+  }
+
+  .event-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 18px;
+    flex-shrink: 0;
+  }
+  .event-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d4537e;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .event-dot.special {
+    background: #2a1a1f;
+    box-shadow: 0 0 0 3px #d4537e;
+  }
+  .event-dot.optional {
+    background: #fce8ee;
+    border: 2px solid #d4537e;
+  }
+  .event-thread {
+    width: 1px;
+    flex: 1;
+    background: #f4b8cb;
+    margin-top: 4px;
+    min-height: 24px;
+  }
+
+  .event-card {
+    flex: 1;
+    background: #fff0f4;
+    border: 1px solid #f4b8cb;
+    border-radius: 14px;
+    padding: 12px 14px;
+    position: relative;
+    transition: transform 0.15s, box-shadow 0.15s;
+    min-width: 0;
+  }
+  .event-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(212,83,126,0.12);
+  }
+  .event-card.highlight {
+    background: #d4537e;
+    border-color: #d4537e;
+  }
+  .event-card.highlight .event-title { color: #fff0f4; }
+  .event-card.highlight .event-desc { color: rgba(255,240,244,0.85); }
+  .event-card.highlight a { color: rgba(255,240,244,0.9); }
+  .event-card.soft {
+    background: #fce8ee;
+    border-color: #f4b8cb;
+    border-style: dashed;
+  }
+
+  .event-emoji { font-size: 16px; margin-bottom: 3px; display: block; }
+  .event-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #2a1a1f;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .event-desc {
+    font-size: 12px;
+    color: #7a4a58;
+    line-height: 1.55;
+    margin-bottom: 3px;
+  }
+  .event-desc + .event-desc { margin-top: 5px; }
+  .event-desc a { color: #d4537e; }
+  .event-card.highlight .event-desc a { color: rgba(255,240,244,0.9); }
+
+  .event-tag {
+    display: inline-block;
+    background: #fce8ee;
+    border: 1px solid #f4b8cb;
+    color: #d4537e;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 10px;
+    margin-top: 7px;
+    line-height: 1.4;
+  }
+
+  /* Info banner — rows */
+  .info-banner {
+    margin: 16px 24px 0;
+    background: #f4b8cb;
+    border-radius: 16px;
+    padding: 4px 0;
+    overflow: hidden;
+  }
+  .banner-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 16px;
+    border-bottom: 1px solid rgba(212,83,126,0.15);
+  }
+  .banner-row:last-child { border-bottom: none; }
+  .banner-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+  .banner-text {
+    font-size: 12px;
+    color: #5a1f30;
+    line-height: 1.55;
+    flex: 1;
+    min-width: 0;
+  }
+  .banner-text strong {
+    font-weight: 500;
+    color: #2a1a1f;
+    display: block;
+    margin-bottom: 1px;
+  }
+
+  /* Footer */
+  .footer-note {
+    margin: 28px 24px 0;
+    background: #2a1a1f;
+    color: #fce8ee;
+    border-radius: 16px;
+    padding: 22px 24px;
+    text-align: center;
+  }
+  .footer-note .big {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 900;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  .footer-note .small {
+    font-size: 12px;
+    color: rgba(252,232,238,0.75);
+    line-height: 1.7;
+  }
+  .footer-note a { color: #f4b8cb; }
+
+  /* Sparkles */
+  .sp1 { top: 20px; left: 20px; animation-delay: 0s; }
+  .sp2 { top: 30px; right: 30px; animation-delay: 0.6s; }
+  .sp3 { top: 80px; left: 10px; animation-delay: 1.2s; font-size: 12px; }
+  .sp4 { top: 60px; right: 15px; animation-delay: 0.9s; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" style="position:relative">
+    <span class="sparkle sp1">✦</span>
+    <span class="sparkle sp2">✦</span>
+    <span class="sparkle sp3">✦</span>
+    <span class="sparkle sp4">✦</span>
+    <p class="its-label">✦ the weekend program ✦</p>
+    <h1 class="name-display">Ana's</h1>
+    <p class="weekend-sub">Birthday Weekend</p>
+    <p style="font-family:'DM Sans';font-size:13px;color:#c47a8a;margin-top:2px;position:relative;z-index:1">20–22 March 2026</p>
+    <a class="location-tag" href="https://www.google.com/maps/dir/-33.8853107,151.1959631/2+Malo+Rd,+Whale+Beach+NSW+2107">2 Malo Rd, Whale Beach</a>
+  </div>
+
+  <!-- INFO BANNER -->
+  <div class="info-banner">
+    <div class="banner-row">
+      <span class="banner-icon">🍾</span>
+      <p class="banner-text"><strong>All food & drinks provided</strong>I don't know if you've heard but I'm a masterchef now (I am only accepting positive feedback on my cooking).</p>
+    </div>
+    <div class="banner-row">
+      <span class="banner-icon">🧳</span>
+      <p class="banner-text"><strong>What to bring</strong>Your best Pink Pony Club outfit, swimsuit, towel. There are plenty of beds but feel free to bring your own pillow/doona if you would like.</p>
+    </div>
+    <div class="banner-row">
+      <span class="banner-icon">🏖️</span>
+      <p class="banner-text"><strong>Weather</strong>Apparently it <em>might</em> be raining but let's choose delusional optimism and assume it's going to be fine. Potentially pack wet weather gear.</p>
+    </div>
+    <div class="banner-row">
+      <span class="banner-icon">🎉</span>
+      <p class="banner-text"><strong>I love u all so much</strong>Please know that there is no pressure to come for the whole thing! Just do what is right for you. I feel so lucky to have you in my life and your presence is the best present.</p>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:24px"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
+
+  <!-- FRIDAY -->
+  <div class="day-header">
+    <span class="day-name">Friday</span>
+    <span class="day-date">20 March</span>
+  </div>
+
+  <div class="events">
+    <div class="event" style="animation-delay:0.1s">
+      <div class="event-time"><span>From<br>9 am</span></div>
+      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+      <div class="event-card">
+        <span class="event-emoji">🚗</span>
+        <p class="event-title">Arrive & settle in</p>
+        <p class="event-desc">Roll up whenever you would like! (Please message me with an ETA xx)</p>
+      </div>
+    </div>
+
+    <div class="event" style="animation-delay:0.2s">
+      <div class="event-time"><span>Evening</span></div>
+      <div class="event-line"><div class="event-dot"></div></div>
+      <div class="event-card highlight">
+        <span class="event-emoji">🐟</span>
+        <p class="event-title">Fish & chips on the beach</p>
+        <p class="event-desc">Chill vibes, will be ordered from Oceana Traders. Menu <a href="https://www.oceanatraders.com.au/menu">here.</a></p>
+        <span class="event-tag" style="background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.25);color:#fff0f4">Ordering time will be vibes-based — plz keep me in the loop on your ETA xx ✦</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:24px"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
+
+  <!-- SATURDAY -->
+  <div class="day-header">
+    <span class="day-name">Saturday</span>
+    <span class="day-date">21 March</span>
+  </div>
+
+  <div class="events">
+    <div class="event" style="animation-delay:0.1s">
+      <div class="event-time"><span>6:15 am</span></div>
+      <div class="event-line"><div class="event-dot optional"></div><div class="event-thread"></div></div>
+      <div class="event-card soft">
+        <span class="event-emoji">🚴‍♀️</span>
+        <p class="event-title">Optional: morning bike ride</p>
+        <p class="event-desc">For those who would like to join. WB → Akuna, with the option to drive to Bayview to skip the road part. Route <a href="https://ridewithgps.com/routes/54272404">here</a>.</p>
+        <p class="event-desc">May also just be a little loop to Palmy — group consensus on the day. Pray for dry weather.</p>
+        <span class="event-tag">Literally so optional, don't even stress about it</span>
+      </div>
+    </div>
+
+    <div class="event" style="animation-delay:0.2s">
+      <div class="event-time"><span>Morning</span></div>
+      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+      <div class="event-card">
+        <span class="event-emoji">☕</span>
+        <p class="event-title">Lazy breakfast</p>
+        <p class="event-desc">Cereal, yoghurt, fruit provided — message any requests. (Instant) coffee provided.</p>
+      </div>
+    </div>
+
+    <div class="event" style="animation-delay:0.25s">
+      <div class="event-time"><span>Mid<br>morning</span></div>
+      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+      <div class="event-card">
+        <span class="event-emoji">🏖️</span>
+        <p class="event-title">Beach & swimming</p>
+        <p class="event-desc">Whale Beach is right there. BOM says it may be raining but I don't trust the weatherpeople. Also you can be wet in the water or wet from the rain, so may as well swim.</p>
+        <p class="event-desc">Whaley can have rough surf — please be careful and only swim if you feel comfortable!</p>
+      </div>
+    </div>
+
+    <div class="event" style="animation-delay:0.3s">
+      <div class="event-time"><span>1:00 pm</span></div>
+      <div class="event-line"><div class="event-dot special"></div><div class="event-thread"></div></div>
+      <div class="event-card highlight">
+        <span class="event-emoji">🎂</span>
+        <p class="event-title">The Birthday Lunch</p>
+        <p class="event-desc">The main event. All food & drinks provided. Please come in your best Pink Pony Club outfit.</p>
+        <p class="event-desc">Think pink, cowboy, disco vibes. idk google it. You'll look fab. Don't dress up if you don't feel like it.</p>
+        <span class="event-tag" style="background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.25);color:#fff0f4">✦ Live your best life queens ✦</span>
+      </div>
+    </div>
+
+    <div class="event" style="animation-delay:0.4s">
+      <div class="event-time"><span>Evening</span></div>
+      <div class="event-line"><div class="event-dot"></div></div>
+      <div class="event-card">
+        <span class="event-emoji">🥂</span>
+        <p class="event-title">The Pink Pony Club Remains Open</p>
+        <p class="event-desc">A relaxed dinner, more drinks, and whatever the night brings.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:24px"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
+
+  <!-- SUNDAY -->
+  <div class="day-header">
+    <span class="day-name">Sunday</span>
+    <span class="day-date">22 March</span>
+  </div>
+
+  <div class="events">
+    <div class="event" style="animation-delay:0.1s">
+      <div class="event-time"><span>Morning</span></div>
+      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+      <div class="event-card">
+        <span class="event-emoji">🥞</span>
+        <p class="event-title">Big breakfast spread</p>
+        <p class="event-desc">Pancakes, eggs, pastries, fruit.</p>
+      </div>
+    </div>
+
+    <div class="event" style="animation-delay:0.2s">
+      <div class="event-time"><span>All<br>day</span></div>
+      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+      <div class="event-card">
+        <span class="event-emoji">🌅</span>
+        <p class="event-title">Swims, chills, good vibes</p>
+        <p class="event-desc">No real plans, just enjoy the day.</p>
+      </div>
+    </div>
+
+    <div class="event" style="animation-delay:0.3s">
+      <div class="event-time"><span>Lunch</span></div>
+      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+      <div class="event-card highlight">
+        <span class="event-emoji">🫶</span>
+        <p class="event-title">Sunday lunch</p>
+        <p class="event-desc">Chill BBQ/leftovers lunch.</p>
+      </div>
+    </div>
+
+    <div class="event" style="animation-delay:0.4s">
+      <div class="event-time"><span>Evening</span></div>
+      <div class="event-line"><div class="event-dot"></div></div>
+      <div class="event-card">
+        <span class="event-emoji">🎉</span>
+        <p class="event-title">Chill dins for those who'd like</p>
+        <p class="event-desc">Casual dinner for anyone keen to head off later. Please feel free to stay as long as you'd like!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    <p class="big">See you at Whale Beach ✦</p>
+    <p class="small">
+      If you need anything, contact Ana — <a href="tel:+61457777520">+61 457 777 520</a><br>
+      2 Malo Rd, Whale Beach · 20–22 March 2026
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
