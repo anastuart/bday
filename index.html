@@ -235,7 +235,7 @@
     margin-bottom: 6px;
   }
   .event-desc {
-    font-size: 14px;
+    font-size: 15px;
     color: #7a4a58;
     line-height: 1.6;
     margin-bottom: 4px;
@@ -249,10 +249,10 @@
     background: #fce8ee;
     border: 1px solid #f4b8cb;
     color: #d4537e;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 500;
-    letter-spacing: 0.05em;
-    padding: 4px 11px;
+    letter-spacing: 0.03em;
+    padding: 5px 13px;
     border-radius: 12px;
     margin-top: 9px;
     line-height: 1.4;
@@ -275,7 +275,7 @@
   .banner-row:last-child { border-bottom: none; }
   .banner-icon { font-size: 22px; flex-shrink: 0; line-height: 1.3; }
   .banner-text {
-    font-size: 14px;
+    font-size: 15px;
     color: #5a1f30;
     line-height: 1.6;
     flex: 1;
@@ -286,7 +286,7 @@
     color: #2a1a1f;
     display: block;
     margin-bottom: 2px;
-    font-size: 14px;
+    font-size: 15px;
   }
 
   /* ── FOOTER ── */
@@ -312,6 +312,38 @@
   }
   .footer-note a { color: #f4b8cb; }
 
+  /* ── CONTACT BUTTONS ── */
+  .contact-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 20px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: transform 0.15s, opacity 0.15s;
+  }
+  .contact-btn:hover { transform: translateY(-1px); opacity: 0.88; }
+  .contact-btn.message {
+    background: #2a1a1f;
+    color: #fce8ee;
+  }
+  .contact-btn.call {
+    background: #fce8ee;
+    color: #d4537e;
+    border: 1.5px solid #d4537e;
+  }
+
   /* sparkles */
   .sp1 { top: 22px; left: 18px; animation-delay: 0s; }
   .sp2 { top: 28px; right: 24px; animation-delay: 0.6s; }
@@ -333,6 +365,10 @@
     <p class="weekend-sub">Birthday Weekend</p>
     <p class="date-sub">20–22 March 2026</p>
     <a class="location-tag" href="https://www.google.com/maps/dir/-33.8853107,151.1959631/2+Malo+Rd,+Whale+Beach+NSW+2107">2 Malo Rd, Whale Beach</a>
+    <div class="contact-buttons">
+      <a class="contact-btn message" href="sms:+61457777520">💬 Message Ana</a>
+      <a class="contact-btn call" href="tel:+61457777520">📞 Call Ana</a>
+    </div>
   </div>
 
   <!-- INFO BANNER -->
