@@ -18,7 +18,7 @@
   .sparkle {
     position: absolute;
     pointer-events: none;
-    font-size: 22px;
+    font-size: 20px;
     opacity: 0.5;
     animation: twinkle 2.5s ease-in-out infinite;
     color: #d4537e;
@@ -29,17 +29,16 @@
   }
 
   .page {
-    max-width: 520px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 0 0 60px;
-    position: relative;
   }
 
-  /* Header */
+  /* ── HEADER ── */
   .header {
     background: #fce8ee;
     text-align: center;
-    padding: 48px 24px 32px;
+    padding: 52px 20px 36px;
     position: relative;
     overflow: hidden;
   }
@@ -47,38 +46,36 @@
     content: '';
     position: absolute;
     top: -40px; left: -40px; right: -40px;
-    height: 120px;
+    height: 130px;
     background: #f4b8cb;
     border-radius: 0 0 60% 60%;
     opacity: 0.4;
   }
-
   .its-label {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #d4537e;
     position: relative;
     z-index: 1;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
   .name-display {
     font-family: 'Playfair Display', serif;
-    font-size: 62px;
+    font-size: 72px;
     font-weight: 900;
     font-style: italic;
     color: #2a1a1f;
     line-height: 0.9;
     position: relative;
     z-index: 1;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     letter-spacing: -1px;
   }
   .weekend-sub {
     font-family: 'Playfair Display', serif;
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 700;
     color: #d4537e;
     letter-spacing: 0.05em;
@@ -87,169 +84,163 @@
     z-index: 1;
     margin-bottom: 4px;
   }
+  .date-sub {
+    font-size: 15px;
+    color: #c47a8a;
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+  }
   .location-tag {
     display: inline-block;
     background: #d4537e;
     color: #fce8ee;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
-    padding: 5px 16px;
-    border-radius: 20px;
-    margin-top: 10px;
+    padding: 7px 20px;
+    border-radius: 24px;
+    margin-top: 14px;
     position: relative;
     z-index: 1;
     text-decoration: none;
   }
-  .location-tag a {
-    color: #fce8ee;
-    text-decoration: none;
-  }
 
-  /* Divider */
+  /* ── DIVIDER ── */
   .divider {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 0 24px;
-    margin: 4px 0;
+    padding: 0 16px;
+    margin: 8px 0;
   }
   .divider-line { flex: 1; height: 1px; background: #f4b8cb; }
-  .divider-star { color: #d4537e; font-size: 12px; }
+  .divider-star { color: #d4537e; font-size: 13px; }
 
-  /* Day header */
+  /* ── DAY HEADER ── */
   .day-header {
-    padding: 24px 24px 0;
+    padding: 28px 16px 0;
     display: flex;
     align-items: baseline;
     gap: 10px;
   }
   .day-name {
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
+    font-size: 38px;
     font-weight: 900;
     color: #d4537e;
     line-height: 1;
     text-transform: uppercase;
   }
   .day-date {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 500;
     color: #c47a8a;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
-  /* Event blocks */
+  /* ── EVENTS — stacked layout ── */
   .events {
-    padding: 12px 24px 0;
+    padding: 14px 16px 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0;
   }
+
+  /* Each event: time label + connector row, then full-width card */
   .event {
     display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    animation: fadeUp 0.5s ease both;
+    flex-direction: column;
+    animation: fadeUp 0.4s ease both;
   }
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .event-time {
-    min-width: 56px;
-    text-align: right;
-    padding-top: 14px;
-    flex-shrink: 0;
+  /* The row containing time text + dot + horizontal line to next */
+  .event-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0 8px;
   }
-  .event-time span {
-    font-size: 16px;
+  .event-time-label {
+    font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: #c47a8a;
     text-transform: uppercase;
-    line-height: 1.3;
-    display: block;
-  }
-
-  .event-line {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 18px;
+    white-space: nowrap;
     flex-shrink: 0;
   }
-  .event-dot {
+  .event-meta-line {
+    flex: 1;
+    height: 1px;
+    background: #f4b8cb;
+  }
+  .event-meta-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
     background: #d4537e;
     flex-shrink: 0;
-    position: relative;
-    z-index: 1;
   }
-  .event-dot.special {
+  .event-meta-dot.special {
     background: #2a1a1f;
     box-shadow: 0 0 0 3px #d4537e;
+    width: 12px;
+    height: 12px;
   }
-  .event-dot.optional {
+  .event-meta-dot.optional {
     background: #fce8ee;
     border: 2px solid #d4537e;
   }
-  .event-thread {
-    width: 1px;
-    flex: 1;
-    background: #f4b8cb;
-    margin-top: 4px;
-    min-height: 24px;
-  }
 
+  /* Full-width card */
   .event-card {
-    flex: 1;
     background: #fff0f4;
     border: 1px solid #f4b8cb;
-    border-radius: 14px;
-    padding: 12px 14px;
-    position: relative;
-    transition: transform 0.15s, box-shadow 0.15s;
-    min-width: 0;
+    border-radius: 16px;
+    padding: 16px 18px;
+    transition: transform 0.15s;
+    margin-bottom: 4px;
   }
-  .event-card:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(212,83,126,0.12);
-  }
+  .event-card:hover { transform: translateY(-1px); }
+
   .event-card.highlight {
     background: #d4537e;
     border-color: #d4537e;
   }
   .event-card.highlight .event-title { color: #fff0f4; }
-  .event-card.highlight .event-desc { color: rgba(255,240,244,0.85); }
+  .event-card.highlight .event-desc { color: rgba(255,240,244,0.88); }
   .event-card.highlight a { color: rgba(255,240,244,0.9); }
+
   .event-card.soft {
     background: #fce8ee;
     border-color: #f4b8cb;
     border-style: dashed;
   }
 
-  .event-emoji { font-size: 22px; margin-bottom: 3px; display: block; }
+  .event-emoji { font-size: 20px; margin-bottom: 5px; display: block; }
+
   .event-title {
     font-family: 'Playfair Display', serif;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 700;
     color: #2a1a1f;
     line-height: 1.2;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
   .event-desc {
-    font-size: 18px;
+    font-size: 14px;
     color: #7a4a58;
-    line-height: 1.55;
-    margin-bottom: 3px;
+    line-height: 1.6;
+    margin-bottom: 4px;
   }
-  .event-desc + .event-desc { margin-top: 5px; }
+  .event-desc + .event-desc { margin-top: 6px; }
   .event-desc a { color: #d4537e; }
   .event-card.highlight .event-desc a { color: rgba(255,240,244,0.9); }
 
@@ -258,40 +249,35 @@
     background: #fce8ee;
     border: 1px solid #f4b8cb;
     color: #d4537e;
-    font-size: 16px;
+    font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.06em;
-    padding: 3px 9px;
-    border-radius: 10px;
-    margin-top: 7px;
+    letter-spacing: 0.05em;
+    padding: 4px 11px;
+    border-radius: 12px;
+    margin-top: 9px;
     line-height: 1.4;
   }
 
-  /* Info banner — rows */
+  /* ── INFO BANNER ── */
   .info-banner {
-    margin: 16px 24px 0;
+    margin: 20px 16px 0;
     background: #f4b8cb;
-    border-radius: 16px;
-    padding: 4px 0;
+    border-radius: 18px;
     overflow: hidden;
   }
   .banner-row {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 13px 16px;
+    gap: 14px;
+    padding: 16px 18px;
     border-bottom: 1px solid rgba(212,83,126,0.15);
   }
   .banner-row:last-child { border-bottom: none; }
-  .banner-icon {
-    font-size: 18px;
-    flex-shrink: 0;
-    line-height: 1.4;
-  }
+  .banner-icon { font-size: 22px; flex-shrink: 0; line-height: 1.3; }
   .banner-text {
-    font-size: 16px;
+    font-size: 14px;
     color: #5a1f30;
-    line-height: 1.55;
+    line-height: 1.6;
     flex: 1;
     min-width: 0;
   }
@@ -299,16 +285,17 @@
     font-weight: 500;
     color: #2a1a1f;
     display: block;
-    margin-bottom: 1px;
+    margin-bottom: 2px;
+    font-size: 14px;
   }
 
-  /* Footer */
+  /* ── FOOTER ── */
   .footer-note {
-    margin: 28px 24px 0;
+    margin: 32px 16px 0;
     background: #2a1a1f;
     color: #fce8ee;
-    border-radius: 16px;
-    padding: 22px 24px;
+    border-radius: 18px;
+    padding: 26px 24px;
     text-align: center;
   }
   .footer-note .big {
@@ -316,20 +303,20 @@
     font-size: 24px;
     font-weight: 900;
     font-style: italic;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   .footer-note .small {
-    font-size: 16px;
+    font-size: 14px;
     color: rgba(252,232,238,0.75);
-    line-height: 1.7;
+    line-height: 1.8;
   }
   .footer-note a { color: #f4b8cb; }
 
-  /* Sparkles */
-  .sp1 { top: 20px; left: 20px; animation-delay: 0s; }
-  .sp2 { top: 30px; right: 30px; animation-delay: 0.6s; }
-  .sp3 { top: 80px; left: 10px; animation-delay: 1.2s; font-size: 12px; }
-  .sp4 { top: 60px; right: 15px; animation-delay: 0.9s; font-size: 12px; }
+  /* sparkles */
+  .sp1 { top: 22px; left: 18px; animation-delay: 0s; }
+  .sp2 { top: 28px; right: 24px; animation-delay: 0.6s; }
+  .sp3 { top: 88px; left: 8px; animation-delay: 1.2s; font-size: 13px; }
+  .sp4 { top: 65px; right: 12px; animation-delay: 0.9s; font-size: 13px; }
 </style>
 </head>
 <body>
@@ -344,7 +331,7 @@
     <p class="its-label">✦ the weekend program ✦</p>
     <h1 class="name-display">Ana's</h1>
     <p class="weekend-sub">Birthday Weekend</p>
-    <p style="font-family:'DM Sans';font-size:13px;color:#c47a8a;margin-top:2px;position:relative;z-index:1">20–22 March 2026</p>
+    <p class="date-sub">20–22 March 2026</p>
     <a class="location-tag" href="https://www.google.com/maps/dir/-33.8853107,151.1959631/2+Malo+Rd,+Whale+Beach+NSW+2107">2 Malo Rd, Whale Beach</a>
   </div>
 
@@ -368,7 +355,7 @@
     </div>
   </div>
 
-  <div class="divider" style="margin-top:24px"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
+  <div class="divider" style="margin-top:28px"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
 
   <!-- FRIDAY -->
   <div class="day-header">
@@ -377,9 +364,13 @@
   </div>
 
   <div class="events">
-    <div class="event" style="animation-delay:0.1s">
-      <div class="event-time"><span>From<br>9 am</span></div>
-      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+
+    <div class="event" style="animation-delay:0.05s">
+      <div class="event-meta">
+        <span class="event-time-label">From 9 am</span>
+        <div class="event-meta-line"></div>
+        <div class="event-meta-dot"></div>
+      </div>
       <div class="event-card">
         <span class="event-emoji">🚗</span>
         <p class="event-title">Arrive & settle in</p>
@@ -387,9 +378,12 @@
       </div>
     </div>
 
-    <div class="event" style="animation-delay:0.2s">
-      <div class="event-time"><span>Evening</span></div>
-      <div class="event-line"><div class="event-dot"></div></div>
+    <div class="event" style="animation-delay:0.1s">
+      <div class="event-meta">
+        <span class="event-time-label">Evening</span>
+        <div class="event-meta-line"></div>
+        <div class="event-meta-dot"></div>
+      </div>
       <div class="event-card highlight">
         <span class="event-emoji">🐟</span>
         <p class="event-title">Fish & chips on the beach</p>
@@ -397,9 +391,10 @@
         <span class="event-tag" style="background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.25);color:#fff0f4">Ordering time will be vibes-based — plz keep me in the loop on your ETA xx ✦</span>
       </div>
     </div>
+
   </div>
 
-  <div class="divider" style="margin-top:24px"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
+  <div class="divider" style="margin-top:28px"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
 
   <!-- SATURDAY -->
   <div class="day-header">
@@ -408,9 +403,13 @@
   </div>
 
   <div class="events">
-    <div class="event" style="animation-delay:0.1s">
-      <div class="event-time"><span>6:15 am</span></div>
-      <div class="event-line"><div class="event-dot optional"></div><div class="event-thread"></div></div>
+
+    <div class="event" style="animation-delay:0.05s">
+      <div class="event-meta">
+        <span class="event-time-label">6:15 am</span>
+        <div class="event-meta-line"></div>
+        <div class="event-meta-dot optional"></div>
+      </div>
       <div class="event-card soft">
         <span class="event-emoji">🚴‍♀️</span>
         <p class="event-title">Optional: morning bike ride</p>
@@ -420,9 +419,12 @@
       </div>
     </div>
 
-    <div class="event" style="animation-delay:0.2s">
-      <div class="event-time"><span>Morning</span></div>
-      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+    <div class="event" style="animation-delay:0.1s">
+      <div class="event-meta">
+        <span class="event-time-label">Morning</span>
+        <div class="event-meta-line"></div>
+        <div class="event-meta-dot"></div>
+      </div>
       <div class="event-card">
         <span class="event-emoji">☕</span>
         <p class="event-title">Lazy breakfast</p>
@@ -430,9 +432,12 @@
       </div>
     </div>
 
-    <div class="event" style="animation-delay:0.25s">
-      <div class="event-time"><span>Mid<br>morning</span></div>
-      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+    <div class="event" style="animation-delay:0.15s">
+      <div class="event-meta">
+        <span class="event-time-label">Mid morning</span>
+        <div class="event-meta-line"></div>
+        <div class="event-meta-dot"></div>
+      </div>
       <div class="event-card">
         <span class="event-emoji">🏖️</span>
         <p class="event-title">Beach & swimming</p>
@@ -441,9 +446,12 @@
       </div>
     </div>
 
-    <div class="event" style="animation-delay:0.3s">
-      <div class="event-time"><span>1:00 pm</span></div>
-      <div class="event-line"><div class="event-dot special"></div><div class="event-thread"></div></div>
+    <div class="event" style="animation-delay:0.2s">
+      <div class="event-meta">
+        <span class="event-time-label">1:00 pm</span>
+        <div class="event-meta-line"></div>
+        <div class="event-meta-dot special"></div>
+      </div>
       <div class="event-card highlight">
         <span class="event-emoji">🎂</span>
         <p class="event-title">The Birthday Lunch</p>
@@ -453,18 +461,22 @@
       </div>
     </div>
 
-    <div class="event" style="animation-delay:0.4s">
-      <div class="event-time"><span>Evening</span></div>
-      <div class="event-line"><div class="event-dot"></div></div>
+    <div class="event" style="animation-delay:0.25s">
+      <div class="event-meta">
+        <span class="event-time-label">Evening</span>
+        <div class="event-meta-line"></div>
+        <div class="event-meta-dot"></div>
+      </div>
       <div class="event-card">
         <span class="event-emoji">🥂</span>
         <p class="event-title">The Pink Pony Club Remains Open</p>
         <p class="event-desc">A relaxed dinner, more drinks, and whatever the night brings.</p>
       </div>
     </div>
+
   </div>
 
-  <div class="divider" style="margin-top:24px"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
+  <div class="divider" style="margin-top:28px"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
 
   <!-- SUNDAY -->
   <div class="day-header">
@@ -473,9 +485,13 @@
   </div>
 
   <div class="events">
-    <div class="event" style="animation-delay:0.1s">
-      <div class="event-time"><span>Morning</span></div>
-      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+
+    <div class="event" style="animation-delay:0.05s">
+      <div class="event-meta">
+        <span class="event-time-label">Morning</span>
+        <div class="event-meta-line"></div>
+        <div class="event-meta-dot"></div>
+      </div>
       <div class="event-card">
         <span class="event-emoji">🥞</span>
         <p class="event-title">Big breakfast spread</p>
@@ -483,9 +499,12 @@
       </div>
     </div>
 
-    <div class="event" style="animation-delay:0.2s">
-      <div class="event-time"><span>All<br>day</span></div>
-      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+    <div class="event" style="animation-delay:0.1s">
+      <div class="event-meta">
+        <span class="event-time-label">All day</span>
+        <div class="event-meta-line"></div>
+        <div class="event-meta-dot"></div>
+      </div>
       <div class="event-card">
         <span class="event-emoji">🌅</span>
         <p class="event-title">Swims, chills, good vibes</p>
@@ -493,9 +512,12 @@
       </div>
     </div>
 
-    <div class="event" style="animation-delay:0.3s">
-      <div class="event-time"><span>Lunch</span></div>
-      <div class="event-line"><div class="event-dot"></div><div class="event-thread"></div></div>
+    <div class="event" style="animation-delay:0.15s">
+      <div class="event-meta">
+        <span class="event-time-label">Lunch</span>
+        <div class="event-meta-line"></div>
+        <div class="event-meta-dot"></div>
+      </div>
       <div class="event-card highlight">
         <span class="event-emoji">🫶</span>
         <p class="event-title">Sunday lunch</p>
@@ -503,15 +525,19 @@
       </div>
     </div>
 
-    <div class="event" style="animation-delay:0.4s">
-      <div class="event-time"><span>Evening</span></div>
-      <div class="event-line"><div class="event-dot"></div></div>
+    <div class="event" style="animation-delay:0.2s">
+      <div class="event-meta">
+        <span class="event-time-label">Evening</span>
+        <div class="event-meta-line"></div>
+        <div class="event-meta-dot"></div>
+      </div>
       <div class="event-card">
         <span class="event-emoji">🎉</span>
         <p class="event-title">Chill dins for those who'd like</p>
         <p class="event-desc">Casual dinner for anyone keen to head off later. Please feel free to stay as long as you'd like!</p>
       </div>
     </div>
+
   </div>
 
   <!-- FOOTER -->
